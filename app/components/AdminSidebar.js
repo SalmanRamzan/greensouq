@@ -16,7 +16,7 @@ export default function AdminSidebar({ activeSection, setActiveSection, setFormM
     <aside className="w-64 bg-white shadow-md h-screen p-5 pt-10 flex flex-col">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-bold text-gray-800">Admin Panel</h2>
-        <Link href="http://localhost:3000/" target="_blank">
+        <Link href="/" target="_blank">
           <Eye className="w-6 h-6 text-gray-600 hover:text-green-600 transition" />
         </Link>
       </div>
