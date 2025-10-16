@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String?
+  email     String   @unique
+  password  String
+  image     String?
+  createdAt DateTime @default(now())
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  image     String?
+  createdAt DateTime @default(now())
+  products  Product[]
+}
+
+model Product {
+  id             String      @id @default(cuid())
+  name           String
+  slug           String      @unique
+  description    String
+  price          Float
+  discountPrice  Float?      // optional discounted price
+  inStock        Boolean     @default(true) // stock availability
+  images         String[]    // multiple product images (array of URLs)
+  heightOptions  String[]    // variant: available heights
+  potOptions     String[]    // variant: available pot types
+  soilCoverOptions String[]  // variant: available soil cover types
+  variants       Json?       // optional JSON object to map variant → price changes
+  categoryId     String
+  category       Category    @relation(fields: [categoryId], references: [id])
+  createdAt      DateTime    @default(now())
+}
