@@ -16,19 +16,18 @@ export default function ProductCard({ product, onQuickShop }) {
   const badgeLabel = inStock ? "Sale" : "Sold Out";
 
   return (
-    <div
-      className="relative group rounded-xl overflow-hidden bg-white shadow-lg hover:shadow-md transition-all duration-300"
+    <div className="relative group rounded-xl overflow-hidden bg-white shadow-lg hover:shadow-md transition-all duration-300 w-full h-[450px] flex flex-col justify-between"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       {/* Image */}
-      <Link href={`/products/${product.slug}`} className="block relative">
+      <Link href={`/products/${product.slug}`} className="block relative flex-shrink-0">
         <Image
           src={product?.images?.[0] || "/placeholder.png"}
           alt={product?.name || "Product Image"}
           width={400}
           height={400}
-          className="object-cover w-full h-64 md:h-72 transition-transform duration-300 group-hover:scale-105"
+          className="object-cover w-full h-64 md:h-64 transition-transform duration-300 group-hover:scale-105"
         />
 
         {/* Badge */}
@@ -42,7 +41,7 @@ export default function ProductCard({ product, onQuickShop }) {
       </Link>
 
       {/* Product Info */}
-      <div className="p-4">
+      <div className="p-4 flex-1 flex flex-col justify-between">
         <h3 className="text-base font-medium mb-1 truncate">{product.name}</h3>
         <div className="flex items-center gap-2">
           <span className="text-lg font-semibold text-gray-500">
@@ -58,7 +57,7 @@ export default function ProductCard({ product, onQuickShop }) {
 
       {/* Action Buttons */}
       <div
-        className={`flex flex-col md:flex-row justify-center gap-2 p-4 absolute bottom-0 left-0 w-full bg-white md:bg-opacity-90 transition-all duration-300 ${
+        className={`flex flex-col md:flex-row justify-center gap-2 p-4 bg-white md:bg-opacity-90 transition-all duration-300 ${
           hovered ? "md:translate-y-0" : "md:translate-y-full"
         } md:group-hover:translate-y-0`}
       >

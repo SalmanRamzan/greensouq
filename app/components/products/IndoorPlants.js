@@ -5,7 +5,7 @@ import ProductCard from "./ProductCard";
 import QuickShop from "./QuickShop";
 import Link from "next/link";
 
-export default function NewArrivals() {
+export default function IndoorPlants() {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
@@ -15,13 +15,14 @@ export default function NewArrivals() {
         const res = await fetch("/api/products");
         const data = await res.json();
 
-        const sorted = data.sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        // Filter products for category "indoor plants"
+        const indoorProducts = data.filter(
+          (product) => product.category.name === "Indoor Plants"
         );
 
-        setProducts(sorted);
+        setProducts(indoorProducts);
       } catch (err) {
-        console.error("Error fetching products:", err);
+        console.error("Error fetching indoor plants:", err);
       }
     };
 
@@ -32,11 +33,11 @@ export default function NewArrivals() {
     <section className="py-16 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       {/* Heading */}
       <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-center mb-[5%] dark:text-white">
-        New Arrivals
+        Top Selling Indoor Plants
       </h2>
 
       {/* Products Grid */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2 place-items-center">
         {products.length > 0 ? (
           products.map((product) => (
             <div key={product.id} className="w-full h-full">
@@ -48,7 +49,7 @@ export default function NewArrivals() {
           ))
         ) : (
           <p className="col-span-full text-center text-gray-500 dark:text-gray-400">
-            No products found.
+            No indoor plants found.
           </p>
         )}
       </div>
